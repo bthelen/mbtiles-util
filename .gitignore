@@ -1,1 +1,10 @@
+# maven stuff #
 target
+
+# java stuff #
+*.class
+
+# package files #
+*.jar
+*.war
+*.ear

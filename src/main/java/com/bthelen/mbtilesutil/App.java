@@ -26,6 +26,8 @@ public class App {
             thisApp.parseArgs(args);
             MapBoxTileStore mapBoxTiles = new MapBoxTileStore(thisApp.getFileName());
             mapBoxTiles.extractTiles();
+            //put us on a new line so prompt isn't next to progress bar.
+            System.out.print("\r\n");
         } catch (ParseException pe) {
             System.out.println(thisApp.getUsageMessage());
             return;
