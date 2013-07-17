@@ -43,7 +43,7 @@ public class App {
     }
 
     private String getUsageMessage() {
-        String usage = "usage: java -jar blahblah.jar [options...]";
+        String usage = "usage: java -jar <insert name of jar here>.jar [options...]";
         usage += "\nOptions:(R) means required arguments, (O) means optional arguments\n";
         usage += "\n-fileName       (R)    The name of the .mbtiles file.";
         return usage;
