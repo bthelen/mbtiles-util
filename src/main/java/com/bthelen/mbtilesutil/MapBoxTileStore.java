@@ -70,7 +70,7 @@ public class MapBoxTileStore {
         return retVal;
     }
 
-    public void extractTiles() {
+    public void extractTiles(String tileScheme) {
 
         Connection connection = null;
 
@@ -94,12 +94,7 @@ public class MapBoxTileStore {
                     int percentComplete = Math.round((i/(float)numTiles) * 100f);
                     printProgressBar(percentComplete);
                 }
-                File tileDir = new File("./" + getFileNameWithoutExtension() + "/" + rs.getInt(1) + "/" + rs.getInt(2));
-                tileDir.mkdirs();
-                File fullPathToTile = new File(tileDir.getAbsolutePath() + "/" + rs.getInt(3) + ".png");
-                FileOutputStream output = new FileOutputStream(fullPathToTile);
-                IOUtils.write(rs.getBytes(4), output);
-                output.close();
+                writeTileToDisk(rs, tileScheme);
             }
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
@@ -115,6 +110,21 @@ public class MapBoxTileStore {
             closeConnection(connection);
         }
 
+    }
+
+    private void writeTileToDisk(ResultSet rs, String tileScheme) throws SQLException, IOException {
+        int zoom = rs.getInt(1);
+        int x = rs.getInt(2);
+        int y = rs.getInt(3);
+        if ("google".equalsIgnoreCase(tileScheme)) {
+            y = convertTMSYtoGoogleY(y, zoom);
+        }
+        File tileDir = new File("./" + getFileNameWithoutExtension() + "/" + zoom + "/" + x);
+        tileDir.mkdirs();
+        File fullPathToTile = new File(tileDir.getAbsolutePath() + "/" + Math.round(y) + ".png");
+        FileOutputStream output = new FileOutputStream(fullPathToTile);
+        IOUtils.write(rs.getBytes(4), output);
+        output.close();
     }
 
     public String getFileName() {
@@ -158,5 +168,10 @@ public class MapBoxTileStore {
             // connection close failed.
             System.out.println(e);
         }
+    }
+
+    protected int convertTMSYtoGoogleY(int y, int zoom) {
+        //TMS counts rows from bottom = 0 and Google counts rows from top = 0
+        return (int) Math.pow(2, zoom) - y - 1;
     }
 }

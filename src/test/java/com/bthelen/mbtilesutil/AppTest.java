@@ -22,10 +22,24 @@ public class AppTest extends TestCase {
     public void testSuccessfulParseArgs() {
         //test the happy path
         App myApp = new App();
+        String[] goodArgs = {"-fileName",  "TestFile.mbtiles", "-tileScheme", "Google"};
+        try {
+            myApp.parseArgs(goodArgs);
+            assertEquals("TestFile.mbtiles", myApp.getFileName());
+            assertEquals("Google", myApp.getTileScheme());
+        } catch (ParseException pe) {
+            fail("Caught ParseException.  Test must fail.");
+        }
+    }
+
+    @Test
+    public void testSuccessfulParseArgsWithoutTileScheme() {
+        //test the happy path
+        App myApp = new App();
         String[] goodArgs = {"-fileName",  "TestFile.mbtiles"};
         try {
             myApp.parseArgs(goodArgs);
-            assertEquals(myApp.getFileName(), "TestFile.mbtiles");
+            assertEquals("TestFile.mbtiles", myApp.getFileName());
         } catch (ParseException pe) {
             fail("Caught ParseException.  Test must fail.");
         }
