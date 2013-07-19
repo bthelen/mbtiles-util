@@ -50,13 +50,11 @@ public class MapBoxTileStore {
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
-            ResultSet rs = statement.executeQuery("select * from tiles");
+            ResultSet rs = statement.executeQuery("select count(*) from tiles");
             //this section and this whole method in general are only necessary
             //because the JDBC driver we are using supports forward only cursors
             //so we can't do rs.last(), rs.getRow() to get the record count.
-            while (rs.next()) {
-                retVal++;
-            }
+            retVal = rs.getInt(1);
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (SQLException e) {
