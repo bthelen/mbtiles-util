@@ -15,12 +15,13 @@ import org.apache.commons.cli.*;
  */
 public class App {
 
+    private Options options = new Options();
     private String fileName;
     private String tileScheme = "TMS";
     private String FILE_NAME_ARGUMENT = "fileName";
-    private String FILE_NAME_ARGUMENT_DESCRIPTION = "The name of the .mbtiles file.  Relative or full path.";
+    private String FILE_NAME_ARGUMENT_DESCRIPTION = "(Required)The name of the .mbtiles file.  Relative or full path.";
     private String TILE_SCHEME_ARGUMENT = "tileScheme";
-    private String getTILE_SCHEME_ARGUMENT_DESCRIPTION = "The name of the tile scheme.  Default is TMS.";
+    private String getTILE_SCHEME_ARGUMENT_DESCRIPTION = "(Optional)The name of the tile scheme.  TMS(default) or Google.";
 
     public static void main(String[] args)
     {
@@ -32,14 +33,13 @@ public class App {
             //put us on a new line so prompt isn't next to progress bar.
             System.out.print("\r\n");
         } catch (ParseException pe) {
-            System.out.println(thisApp.getUsageMessage());
+            thisApp.printUsage();
             return;
         }
     }
 
     protected void parseArgs(String[] args) throws ParseException {
         CommandLineParser parser = new BasicParser();
-        Options options = new Options();
         Option fileNameOption = new Option(FILE_NAME_ARGUMENT, true, FILE_NAME_ARGUMENT_DESCRIPTION);
         fileNameOption.setRequired(true);
         options.addOption(fileNameOption);
@@ -50,11 +50,9 @@ public class App {
         setTileScheme(line.getOptionValue(TILE_SCHEME_ARGUMENT));
     }
 
-    private String getUsageMessage() {
-        String usage = "usage: java -jar <insert name of jar here>.jar [options...]";
-        usage += "\nOptions:(R) means required arguments, (O) means optional arguments\n";
-        usage += "\n-fileName       (R)    The name of the .mbtiles file.";
-        return usage;
+    private void printUsage() {
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp( "mbtiles-util", options );
     }
 
     public String getFileName() {
