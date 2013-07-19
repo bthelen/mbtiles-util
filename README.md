@@ -21,7 +21,7 @@ After building copy the target/mbtiles-util-1.0-SNAPSHOT-jar-with-dependencies.j
 Create a the following shell script called mbtiles-util in your ~/bin directory:
 
     #!/bin/bash
-    java -jar /Users/bthelen/bin/mbtiles-util-1.0-SNAPSHOT-jar-with-dependencies.jar $@
+    java -jar ~/bin/mbtiles-util-1.0-SNAPSHOT-jar-with-dependencies.jar $@
 
 Run the mbtiles-util file on your .mbtiles file.  Here are the usage notes:
 
