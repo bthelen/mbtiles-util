@@ -9,6 +9,7 @@ import org.apache.commons.cli.*;
  * Arguments    Required    Description
  *
  * fileName     Yes         The name of the .mbtiles file.
+ * tileScheme   No          TMS (default) or Google.  Case insensitive.
  *
  * -------------------------------------------------------------------------------------------------
  *
@@ -21,7 +22,7 @@ public class App {
     private String FILE_NAME_ARGUMENT = "fileName";
     private String FILE_NAME_ARGUMENT_DESCRIPTION = "(Required)The name of the .mbtiles file.  Relative or full path.";
     private String TILE_SCHEME_ARGUMENT = "tileScheme";
-    private String getTILE_SCHEME_ARGUMENT_DESCRIPTION = "(Optional)The name of the tile scheme.  TMS(default) or Google.";
+    private String TILE_SCHEME_ARGUMENT_DESCRIPTION = "(Optional)The name of the tile scheme.  TMS(default) or Google.";
 
     public static void main(String[] args)
     {
@@ -43,7 +44,7 @@ public class App {
         Option fileNameOption = new Option(FILE_NAME_ARGUMENT, true, FILE_NAME_ARGUMENT_DESCRIPTION);
         fileNameOption.setRequired(true);
         options.addOption(fileNameOption);
-        Option tileSchemeOption = new Option(TILE_SCHEME_ARGUMENT, true, getTILE_SCHEME_ARGUMENT_DESCRIPTION);
+        Option tileSchemeOption = new Option(TILE_SCHEME_ARGUMENT, true, TILE_SCHEME_ARGUMENT_DESCRIPTION);
         options.addOption(tileSchemeOption);
         CommandLine line = parser.parse(options, args);
         setFileName(line.getOptionValue(FILE_NAME_ARGUMENT));
