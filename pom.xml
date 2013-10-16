@@ -60,4 +60,7 @@
         </dependency>
     </dependencies>
 
+    <scm>
+        <developerConnection>scm:git:git@github.com:bthelen/mbtiles-util.git</developerConnection>
+    </scm>
 </project>
