@@ -1,6 +1,8 @@
 MBTiles Util
 ====================
 
+[![Build Status](https://travis-ci.org/bthelen/mbtiles-util.png?branch=master)](https://travis-ci.org/bthelen/mbtiles-util)
+
 Description
 ---------------------
 A command line utility for extracting map tiles from [MBTiles](https://github.com/mapbox/mbtiles-spec) files.  Makes it easy for creating MBTiles archives in [TileMill](http://www.mapbox.com/tilemill/) then using the tiles as overlays in the [Google Maps API](https://developers.google.com/maps/), [Leaflet](http://leafletjs.com/), etc. 
