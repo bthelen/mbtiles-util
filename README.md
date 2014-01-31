@@ -3,7 +3,7 @@ MBTiles Util
 
 Description
 ---------------------
-A command line utility for extracting map tiles from .mbtiles files.  Makes it easy for creating .mbtiles archives in [TileMill](http://www.mapbox.com/tilemill/) then using the tiles as overlays in the [Google Maps API](https://developers.google.com/maps/) for the Web or iOS. 
+A command line utility for extracting map tiles from [MBTiles](https://github.com/mapbox/mbtiles-spec) files.  Makes it easy for creating MBTiles archives in [TileMill](http://www.mapbox.com/tilemill/) then using the tiles as overlays in the [Google Maps API](https://developers.google.com/maps/), [Leaflet](http://leafletjs.com/), etc. 
 
 Build Environment
 ---------------------
