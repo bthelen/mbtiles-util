@@ -27,6 +27,37 @@ public class AppTest extends TestCase {
             myApp.parseArgs(goodArgs);
             assertEquals("TestFile.mbtiles", myApp.getFileName());
             assertEquals("Google", myApp.getTileScheme());
+            assertFalse(myApp.isSummaryOnly());
+        } catch (ParseException pe) {
+            fail("Caught ParseException.  Test must fail.");
+        }
+    }
+
+    @Test
+    public void testSuccessfulParseArgsGnuStyle() {
+        //test the happy path
+        App myApp = new App();
+        String[] goodArgs = {"--fileName",  "TestFile.mbtiles", "--tileScheme", "Google"};
+        try {
+            myApp.parseArgs(goodArgs);
+            assertEquals("TestFile.mbtiles", myApp.getFileName());
+            assertEquals("Google", myApp.getTileScheme());
+            assertFalse(myApp.isSummaryOnly());
+        } catch (ParseException pe) {
+            fail("Caught ParseException.  Test must fail.");
+        }
+    }
+
+    @Test
+    public void testSuccessfulParseAllArgs() {
+        //test the happy path
+        App myApp = new App();
+        String[] goodArgs = {"-fileName",  "TestFile.mbtiles", "-tileScheme", "Google", "-summaryOnly"};
+        try {
+            myApp.parseArgs(goodArgs);
+            assertEquals("TestFile.mbtiles", myApp.getFileName());
+            assertEquals("Google", myApp.getTileScheme());
+            assertTrue(myApp.isSummaryOnly());
         } catch (ParseException pe) {
             fail("Caught ParseException.  Test must fail.");
         }
@@ -40,6 +71,7 @@ public class AppTest extends TestCase {
         try {
             myApp.parseArgs(goodArgs);
             assertEquals("TestFile.mbtiles", myApp.getFileName());
+            assertFalse(myApp.isSummaryOnly());
         } catch (ParseException pe) {
             fail("Caught ParseException.  Test must fail.");
         }

@@ -19,10 +19,13 @@ public class App {
     private Options options = new Options();
     private String fileName;
     private String tileScheme = "TMS";
+    private boolean summaryOnly = false;
     private String FILE_NAME_ARGUMENT = "fileName";
     private String FILE_NAME_ARGUMENT_DESCRIPTION = "(Required)The name of the .mbtiles file.  Relative or full path.";
     private String TILE_SCHEME_ARGUMENT = "tileScheme";
     private String TILE_SCHEME_ARGUMENT_DESCRIPTION = "(Optional)The name of the tile scheme.  TMS(default) or Google.";
+    private String SUMMARY_ARGUMENT = "summaryOnly";
+    private String SUMMARY_ARGUMENT_DESCRIPTION = "Print summary statistics only.  Do not extract.";
 
     public static void main(String[] args)
     {
@@ -46,9 +49,12 @@ public class App {
         options.addOption(fileNameOption);
         Option tileSchemeOption = new Option(TILE_SCHEME_ARGUMENT, true, TILE_SCHEME_ARGUMENT_DESCRIPTION);
         options.addOption(tileSchemeOption);
+        Option summaryOnlyOption = new Option(SUMMARY_ARGUMENT, SUMMARY_ARGUMENT_DESCRIPTION);
+        options.addOption(summaryOnlyOption);
         CommandLine line = parser.parse(options, args);
         setFileName(line.getOptionValue(FILE_NAME_ARGUMENT));
         setTileScheme(line.getOptionValue(TILE_SCHEME_ARGUMENT));
+        setSummaryOnly(line.hasOption(SUMMARY_ARGUMENT));
     }
 
     private void printUsage() {
@@ -71,4 +77,8 @@ public class App {
     public void setTileScheme(String tileScheme) {
         this.tileScheme = tileScheme;
     }
+
+    public boolean isSummaryOnly() { return summaryOnly; }
+
+    public void setSummaryOnly(boolean summaryOnly) { this.summaryOnly = summaryOnly; }
 }
