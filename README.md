@@ -30,6 +30,7 @@ Run the mbtiles-util file on your .mbtiles file.  Here are the usage notes:
     usage: mbtiles-util
      -fileName <arg>     (Required)The name of the .mbtiles file.  Relative or
                          full path.
+     -summaryOnly        Print summary statistics only.  Do not extract.
      -tileScheme <arg>   (Optional)The name of the tile scheme.  TMS(default)
                          or Google.
 See [maptiler.org](http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/) for more information about map tiling.
